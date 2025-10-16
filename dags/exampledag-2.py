@@ -44,7 +44,6 @@ with DAG(
     dag_id="ping_api_sensor_dag",
     default_args=default_args,
     start_date=datetime(2024, 1, 1),
-    schedule_interval=None,  # Manual trigger
     catchup=False,
     tags=["sensor", "api"],
 ) as dag:
