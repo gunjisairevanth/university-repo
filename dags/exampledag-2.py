@@ -2,16 +2,15 @@ from datetime import datetime, timedelta
 import requests
 from airflow import DAG
 from airflow.sensors.base import BaseSensorOperator
-from airflow.utils.decorators import apply_defaults
 
 
 class PingApiSensor(BaseSensorOperator):
     """
     Custom Sensor that polls an API endpoint and stops when response is [{"res": false}]
     """
-    @apply_defaults
-    def __init__(self, endpoint: str, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+
+    def __init__(self, endpoint: str, **kwargs):
+        super().__init__(**kwargs)
         self.endpoint = endpoint
 
     def poke(self, context):
@@ -26,7 +25,7 @@ class PingApiSensor(BaseSensorOperator):
                 self.log.info("Condition met: [{'res': false}] → stopping sensor.")
                 return True
 
-            self.log.info("Condition not met, retrying...")
+            self.log.info("Condition not met, will retry later...")
             return False
 
         except Exception as e:
@@ -54,8 +53,8 @@ with DAG(
         task_id="wait_for_ping",
         endpoint="https://68f0b8e20b966ad50033e931.mockapi.io/83198/ping",
         poke_interval=15,  # seconds between retries
-        timeout=60 * 10,   # give up after 10 minutes
-        mode="poke",
+        timeout=60 * 1,   # give up after 10 minutes
+        mode="reschedule",  # <-- non-blocking mode
     )
 
     wait_for_ping
