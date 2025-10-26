@@ -52,7 +52,7 @@ with DAG(
         task_id="wait_for_ping",
         endpoint="https://68f0b8e20b966ad50033e931.mockapi.io/83198/ping",
         poke_interval=15,  # seconds between retries
-        timeout=60 * 1,   # give up after 10 minutes
+        timeout=60 * 5,   # give up after 10 minutes
         mode="reschedule",  # <-- non-blocking mode
     )
 
