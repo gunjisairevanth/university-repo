@@ -12,6 +12,7 @@ default_args = {
 
 # Define the callable function
 def call_public_api(**context):
+    from slack_sdk import WebClient
     """
     Example task that calls a third-party API using the 'requests' package
     and pushes the result into XCom.
