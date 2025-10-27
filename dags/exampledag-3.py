@@ -32,7 +32,6 @@ def call_public_api(**context):
 with DAG(
     dag_id="third_party_api_with_python_operator",
     start_date=datetime(2025, 1, 1),
-    schedule_interval=None,
     catchup=False,
     default_args=default_args,
     tags=["example", "api", "requests"],
