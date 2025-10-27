@@ -39,8 +39,7 @@ with DAG(
 
     api_task = PythonOperator(
         task_id="call_api_task",
-        python_callable=call_public_api,
-        provide_context=True,
+        python_callable=call_public_api
     )
 
     api_task
