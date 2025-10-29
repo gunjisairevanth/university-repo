@@ -30,6 +30,7 @@ dag = DAG(
     },
     description='Minimal continuous DAG',
     schedule="@continuous",
+    max_active_runs=1,
     catchup=False,
     tags=['minimal', 'continuous'],
 )
