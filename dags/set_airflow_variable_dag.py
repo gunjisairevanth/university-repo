@@ -38,7 +38,7 @@ def set_airflow_variable_dag():
     )
 
     list_variable_task = PythonOperator(
-        task_id='set_variable_task',
+        task_id='list_variable_task',
         python_callable=list_airflow_variables, 
         retries=1, 
     )
