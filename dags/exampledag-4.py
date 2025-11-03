@@ -78,7 +78,7 @@ sensor = PythonSensor(
     mode='reschedule',  # Required for deferrable mode
     poke_interval=5,    # Check every 5 seconds
     timeout=60,         # Timeout after 1 minute
-    deferrable=True,    # Enable deferrable mode
+    # deferrable=True,    # Enable deferrable mode
     dag=dag,
 )
 
