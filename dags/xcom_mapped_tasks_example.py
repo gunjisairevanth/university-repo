@@ -11,10 +11,7 @@ from airflow.secrets.local_filesystem import LocalFilesystemBackend
 )
 def xcom_mapped_tasks_example():
 
-    @task
-    def generate_numbers() -> List[int]:
 
-        return [1, 2, 3, 4, 5]
 
     @task
     def mapped_task(number: int, index: int, **kwargs):
@@ -34,7 +31,7 @@ def xcom_mapped_tasks_example():
             results.append(xcom_value)
         print("Processed XCom entries:", results)
 
-    numbers = generate_numbers()
+    numbers = [1, 2, 3, 4, 5]
 
     mapped_results = mapped_task.expand(
         number=numbers,
