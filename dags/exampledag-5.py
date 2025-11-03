@@ -46,7 +46,7 @@ with DAG(
     'memory_intensive_dag',
     default_args=default_args,
     description='A DAG with memory-intensive tasks',
-    schedule_interval=timedelta(days=1),
+   
     catchup=False,
 ) as dag:
 
