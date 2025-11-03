@@ -1,6 +1,7 @@
 from airflow.decorators import dag, task
 from datetime import datetime
 from typing import List
+from airflow.secrets.local_filesystem import LocalFilesystemBackend
 
 @dag(
     dag_id="xcom_mapped_tasks_example",
