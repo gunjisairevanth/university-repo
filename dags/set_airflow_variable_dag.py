@@ -4,46 +4,28 @@ from airflow.operators.python import PythonOperator
 from datetime import datetime
 
 @dag(
-    dag_id='set_airflow_variable_dag',
+    dag_id='get_airflow_variable_dag',
     start_date=datetime(2023, 1, 1),
     catchup=False,
     tags=['example', 'variables', 'python_operator']
 )
 
-def set_airflow_variable_dag():
+def get_airflow_variable_dag():
 
-    def set_variable():
-  
-        variable_key = "test"  
-        variable_value = "test" 
+    def get_variable():
 
-        Variable.set(key=variable_key, value=variable_value)
-        print(f"Variable '{variable_key}' set with value '{variable_value}'.")
+        variable_value = Variable.get(key="VAR_A")
+        print(f"The value of the variable is: {variable_value}")
 
-    def list_airflow_variables():
-        """
-        Task to list all Airflow variables and print their keys and values.
-        """
-        # Fetch all variables stored in Airflow
-        variables = Variable.get_all()
-        
-        # Print each variable's key and value
-        for key, value in variables.items():
-            print(f"Variable Key: {key}, Variable Value: {value}")
 
-    set_variable_task = PythonOperator(
-        task_id='set_variable_task',
-        python_callable=set_variable, 
+    get_variable_task = PythonOperator(
+        task_id='get_variable_task',
+        python_callable=get_variable, 
         retries=1, 
     )
 
-    list_variable_task = PythonOperator(
-        task_id='list_variable_task',
-        python_callable=list_airflow_variables, 
-        retries=1, 
-    )
 
-    set_variable_task >> list_variable_task
+    get_variable_task 
 
 
-set_airflow_variable_dag()
+get_airflow_variable_dag()
