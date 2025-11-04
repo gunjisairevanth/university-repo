@@ -21,7 +21,7 @@ def get_airflow_variable_dag():
         """
         # Retrieve all variables from AWS Secrets Manager using Airflow's Variable.get method
         # Variables are prefixed with 'airflow/variables/' in AWS Secrets Manager
-        variables_prefix = "airflow/variables/"
+        variables_prefix = "airflow"
         all_variables: Dict[str, str] = Variable.get(variables_prefix, deserialize_json=True)
         
         # Log each variable and its value
